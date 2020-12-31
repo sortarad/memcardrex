@@ -1,0 +1,54 @@
+<controls:FluentWindow xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="400" Height="450" Width="450"
+                      xmlns:controls="using:Avalonia.Controls"
+                      xmlns:vm="using:MemcardRex.ViewModels"
+                      x:Class="MemcardRex.Views.PluginsWindow"
+                      Icon="{x:Null}"
+                      x:Name="PluginsWindow"
+                      WindowStartupLocation="CenterOwner"
+                      Background="{x:Null}"
+                      Title="Plugins">
+  <controls:FluentWindow.Styles>
+    <Style Selector="TitleBar:fullscreen">
+      <Setter Property="Background" Value="#Df000000" />
+    </Style>
+  </controls:FluentWindow.Styles>
+
+  <Design.DataContext>
+    <vm:PluginsWindowViewModel/>
+  </Design.DataContext>
+  
+  <Panel Margin="{Binding #PluginsWindow.OffScreenMargin}">
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial TintColor="#222222" MaterialOpacity="0.85" TintOpacity="1" />
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+    
+    <Grid RowDefinitions="*,Auto" Margin="30">
+       
+      <DataGrid Items="{Binding Plugins}" SelectionMode="Single" SelectedIndex="{Binding PluginIndex}">
+        <DataGrid.Columns>
+          <DataGridTextColumn
+            Header="Plugin name" Binding="{Binding pluginName}"/>
+          <DataGridTextColumn
+            Header="Author"  Binding="{Binding pluginAuthor}"/>
+          <DataGridTextColumn
+            Header="Supported game(s)" Binding="{Binding pluginSupportedGames}"/>
+        </DataGrid.Columns>
+      </DataGrid>
+      
+      
+      <Grid Grid.Row="1" Margin="4">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+          <Button Command="{Binding Config}" CommandParameter="{Binding  ElementName=PluginsWindow}" Content="Config"/>
+          <Button Margin="2,0"  Command="{Binding About}" CommandParameter="{Binding  ElementName=PluginsWindow}" Content="About"/>
+       </StackPanel>
+        <Button HorizontalAlignment="Right" Command="{Binding Ok}" CommandParameter="{Binding  ElementName=PluginsWindow}" Content="OK"/>
+      </Grid>
+    </Grid>
+  </Panel>
+</controls:FluentWindow>

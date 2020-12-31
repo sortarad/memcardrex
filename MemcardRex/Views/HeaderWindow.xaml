@@ -1,0 +1,60 @@
+<controls:FluentWindow xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="400" Height="300" Width="450"
+                      xmlns:controls="using:Avalonia.Controls"
+                      xmlns:vm="using:MemcardRex.ViewModels"
+                      x:Class="MemcardRex.Views.HeaderWindow"
+                      Icon="{x:Null}"
+                      x:Name="HeaderWindow"
+                      WindowStartupLocation="CenterOwner"
+                      Background="{x:Null}"
+                      Title="Header"
+                      Closed="TopLevel_OnClosed">
+  <controls:FluentWindow.Styles>
+    <Style Selector="TitleBar:fullscreen">
+      <Setter Property="Background" Value="#Df000000" />
+    </Style>
+  </controls:FluentWindow.Styles>
+
+  <Design.DataContext>
+    <vm:HeaderWindowViewModel/>
+  </Design.DataContext>
+  
+  <Panel Margin="{Binding #HeaderWindow.OffScreenMargin}">
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial TintColor="#222222" MaterialOpacity="0.85" TintOpacity="1" />
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+    
+    <Grid RowDefinitions="*,Auto,Auto" Margin="30">
+     
+      <TextBox Margin="2" Text="{Binding SaveTitle}"/>
+        
+      <Grid Grid.Row="1" ColumnDefinitions="*,*,*" Margin="2">
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+          <TextBlock Text="ProductCode" Margin="0,2"/>
+          <TextBox  Text="{Binding ProdCodeText}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+          <TextBlock Text="Identifier" Margin="0,2"/>
+          <TextBox Text="{Binding  IdentifierText}"/>
+        </StackPanel> 
+        <StackPanel Grid.Column="2" Orientation="Vertical">
+          <TextBlock Text="Region" Margin="0,2"/>
+          <ComboBox  Items="{Binding Regions}" SelectedIndex="{Binding RegionSelectedIndex}" />
+        </StackPanel>
+        
+      </Grid>
+        
+        
+      <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="2">
+        <Button Margin="2,0" Command="{Binding Cancel}" CommandParameter="{Binding  ElementName=HeaderWindow}" Content="Cancel"/>
+        <Button Command="{Binding Ok}" CommandParameter="{Binding  ElementName=HeaderWindow}" Content="OK"/>
+      </StackPanel>
+     
+      </Grid>
+  </Panel>
+</controls:FluentWindow>

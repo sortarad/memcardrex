@@ -1,0 +1,348 @@
+<controls:FluentWindow xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d" d:DesignWidth="1350" d:DesignHeight="700" Height="800" Width="1400"
+                      xmlns:controls="using:Avalonia.Controls"
+                      xmlns:i="using:Projektanker.Icons.Avalonia"
+                      xmlns:vm="using:MemcardRex.ViewModels"
+                      x:Class="MemcardRex.Views.MainWindow"
+                      Icon="{x:Null}"
+                      x:Name="MainWindow"
+                      WindowStartupLocation="CenterScreen"
+                      Background="{x:Null}"
+                      Title="MemcardRex"
+                      Closing="Window_OnClosing">
+  <controls:FluentWindow.Styles>
+    <Style Selector="TitleBar:fullscreen">
+      <Setter Property="Background" Value="#Df000000" />
+    </Style>
+  </controls:FluentWindow.Styles>
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+    
+    
+     
+            
+    <NativeMenu.Menu>
+    <NativeMenu>
+      <NativeMenuItem Header="File">
+        <NativeMenuItem.Menu>
+          <NativeMenu>
+            <NativeMenuItem Header="New" Command="{Binding New}"/>
+            <NativeMenuItem Header="Open..." Command="{Binding OpenCard}"/>
+            <NativeMenuItem Header="Close" Command="{Binding   CloseCard}"   IsEnabled="{Binding CloseToolStripMenuItemEnabled}"/>
+            <NativeMenuItem Header="Close all" Command="{Binding CloseAll}" IsEnabled="{Binding CloseAllToolStripMenuItemEnabled}"/>
+            <NativeMenuItemSeperator/>
+            <NativeMenuItem Header="Save" Command="{Binding SaveCard}" IsEnabled="{Binding SaveButtonEnabled}"/>
+            <NativeMenuItem Header="Save as..." Command="{Binding SaveCardAs}" IsEnabled="{Binding  SaveAsToolStripMenuItemEnabled}"/>
+            <NativeMenuItemSeperator/>
+            <NativeMenuItem Header="Quit" Command="{Binding  Exit}"/>
+          </NativeMenu>
+        </NativeMenuItem.Menu>
+      </NativeMenuItem>
+      <NativeMenuItem Header="Edit">
+        <NativeMenuItem.Menu>
+          <NativeMenu>
+            <NativeMenuItem Header="Edit save header..." Command="{Binding EditHeader}" IsEnabled="{Binding EditSaveHeaderToolStripMenuItemEnabled}"/>
+            <NativeMenuItem Header="Edit save comment..." Command="{Binding EditComments}"  IsEnabled="{Binding EditSaveCommentToolStripMenuItemEnabled}"/>
+            <NativeMenuItem Header="Edit with plugin"  IsEnabled="{Binding EditWithPluginToolStripMenuItemEnabled}">
+              <NativeMenuItem.Menu>
+                <NativeMenu PropertyChanged="AvaloniaObject_OnPropertyChanged"/>
+              </NativeMenuItem.Menu>
+            </NativeMenuItem>
+            <NativeMenuItemSeperator/>
+            <NativeMenuItem Header="Compare with temp buffer" Command="{Binding CompareWithTemp}" IsEnabled="{Binding compareWithTempBufferToolStripMenuItem1Enabled}"/>
+            <NativeMenuItemSeperator/>
+            <NativeMenuItem Header="Edit icon..." Command="{Binding EditIcon}"  IsEnabled="{Binding EditIconToolStripMenuItemEnabled}"/>
+            <NativeMenuItemSeperator/>
+            <NativeMenuItem Header="Delete save" Command="{Binding  DeleteSave}"  IsEnabled="{Binding DeleteSaveToolStripMenuItemEnabled}"/>
+            <NativeMenuItem Header="Restore save" Command="{Binding  RestoreSave}"  IsEnabled="{Binding RestoreSaveToolStripMenuItemEnabled}"/>
+            <NativeMenuItem Header="Remove save (format slot(s))" Command="{Binding    RemoveSave}"  IsEnabled="{Binding RemoveSaveformatSlotsToolStripMenuItemEnabled}"/>
+            <NativeMenuItemSeperator/>
+            <NativeMenuItem Header="Copy save to temp buffer" Command="{Binding CopySave}"  IsEnabled="{Binding copySaveToTempraryBufferToolStripMenuItemEnabled}" />
+            <NativeMenuItem Header="Paste save from temp buffer" Command="{Binding  PasteSave}"  IsEnabled="{Binding pasteSaveFromTemporaryBufferToolStripMenuItemEnabled}"/>
+            <NativeMenuItemSeperator/>
+            <NativeMenuItem Header="Import save"  Command="{Binding ImportSave}"  IsEnabled="{Binding importSaveToolStripMenuItemEnabled}"/>
+            <NativeMenuItem Header="Export save" Command="{Binding ExportSave}"  IsEnabled="{Binding exportSaveToolStripMenuItemEnabled}"/>
+          </NativeMenu>
+        </NativeMenuItem.Menu>
+      </NativeMenuItem>
+      <NativeMenuItem Header="Hardware">
+        <NativeMenuItem.Menu>
+          <NativeMenu>
+           
+            <NativeMenuItem Header="Read save data">
+          
+                <NativeMenuItem.Menu>
+                  <NativeMenu>
+                  <NativeMenuItem Header="DexDrive" Command="{Binding DexRead}" />
+                  <NativeMenuItemSeperator/>
+                  <NativeMenuItem Header="MemCARDuino" Command="{Binding MemCARDuinoRead}" />
+                  
+                  <NativeMenuItemSeperator/>
+                  
+                  <NativeMenuItem Header="PS1CardLink" Command="{Binding PS1CardLinkRead}" />
+                  </NativeMenu>
+                </NativeMenuItem.Menu>
+           
+            </NativeMenuItem>
+            
+            <NativeMenuItem Header="Write save data">
+              <NativeMenuItem.Menu>
+                <NativeMenu>
+                  <NativeMenuItem Header="DexDrive" Command="{Binding DexWrite}" />
+                  <NativeMenuItemSeperator/>
+                  <NativeMenuItem Header="MemCARDuino" Command="{Binding MemCARDuinoWrite}" />
+                  
+                  <NativeMenuItemSeperator/>
+                  
+                  <NativeMenuItem Header="PS1CardLink" Command="{Binding PS1CardLinkWrite}" />
+                </NativeMenu>
+              </NativeMenuItem.Menu>
+            </NativeMenuItem>
+            
+            <NativeMenuItemSeperator/>
+            
+            <NativeMenuItem Header="FormatCard" >
+              <NativeMenuItem.Menu>
+                <NativeMenu>
+                  <NativeMenuItem Header="DexDrive" Command="{Binding DexFormat}" />
+                  <NativeMenuItemSeperator/>
+                  <NativeMenuItem Header="MemCARDuino" Command="{Binding MemCARDuinoFormat}" />
+                  
+                  <NativeMenuItemSeperator/>
+                  
+                  <NativeMenuItem Header="PS1CardLink" Command="{Binding PS1CardLinkFormat}" />
+                </NativeMenu>
+              </NativeMenuItem.Menu>
+            </NativeMenuItem>
+            
+          </NativeMenu>
+        </NativeMenuItem.Menu>
+        </NativeMenuItem>
+      
+      <NativeMenuItem Header="Options">
+          <NativeMenuItem.Menu>
+            <NativeMenu>
+                
+              <NativeMenuItem Header="Preferences" Command="{Binding OpenPreferences}"/>
+              <NativeMenuItemSeperator/>
+              <NativeMenuItem Header="Plugin" Command="{Binding OpenPlugins}"/>
+              </NativeMenu>
+          </NativeMenuItem.Menu>
+      </NativeMenuItem>
+        
+      <NativeMenuItem Header="Help">
+          <NativeMenuItem.Menu>
+            <NativeMenu>
+              
+              <NativeMenuItem Header="Readme" Command="{Binding OpenReadme}" />
+            </NativeMenu>
+          </NativeMenuItem.Menu>
+        </NativeMenuItem>
+      
+    </NativeMenu>
+  </NativeMenu.Menu>
+
+  <Panel Margin="{Binding #MainWindow.OffScreenMargin}">
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial TintColor="#222222" MaterialOpacity="0.85" TintOpacity="1" />
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+
+        <StackPanel IsVisible="{Binding IsTopMenuVisible}" Orientation="Horizontal" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button Content="File" Command="{Binding OpenMenu}" x:Name="FileMenu" CommandParameter="{Binding  ElementName=FileMenu}">
+        <Button.ContextMenu>
+          <ContextMenu>
+            <MenuItem Header="New" Command="{Binding New}"/>
+            <MenuItem Header="Open..." Command="{Binding OpenCard}"/>
+            <MenuItem Header="Close" Command="{Binding   CloseCard}"   IsEnabled="{Binding CloseToolStripMenuItemEnabled}"/>
+            <MenuItem Header="Close all" Command="{Binding CloseAll}" IsEnabled="{Binding CloseAllToolStripMenuItemEnabled}"/>
+            <Separator/>
+            <MenuItem Header="Save" Command="{Binding SaveCard}" IsEnabled="{Binding SaveButtonEnabled}"/>
+            <MenuItem Header="Save as..." Command="{Binding SaveCardAs}" IsEnabled="{Binding  SaveAsToolStripMenuItemEnabled}"/>
+            <Separator/>
+            <MenuItem Header="Quit" Command="{Binding  Exit}"/>
+          </ContextMenu>
+        </Button.ContextMenu>
+      </Button>
+      <Button Content="Edit"  Command="{Binding OpenMenu}" x:Name="EditMenu" CommandParameter="{Binding  ElementName=EditMenu}">
+          <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit save header..." Command="{Binding EditHeader}" IsEnabled="{Binding EditSaveHeaderToolStripMenuItemEnabled}"/>
+                        <MenuItem Header="Edit save comment..." Command="{Binding EditComments}"  IsEnabled="{Binding EditSaveCommentToolStripMenuItemEnabled}"/>
+                        <MenuItem Header="Edit with plugin" Items="{Binding EditWithPluginToolStripMenuItem}"  IsEnabled="{Binding EditWithPluginToolStripMenuItemEnabled}"/>
+                        <Separator/>
+                        <MenuItem Header="Compare with temp buffer" Command="{Binding CompareWithTemp}" IsEnabled="{Binding compareWithTempBufferToolStripMenuItem1Enabled}"/>
+                        <Separator/>
+                        <MenuItem Header="Edit icon..." Command="{Binding EditIcon}"  IsEnabled="{Binding EditIconToolStripMenuItemEnabled}"/>
+                        <Separator/>
+                        <MenuItem Header="Delete save" Command="{Binding  DeleteSave}"  IsEnabled="{Binding DeleteSaveToolStripMenuItemEnabled}"/>
+                        <MenuItem Header="Restore save" Command="{Binding  RestoreSave}"  IsEnabled="{Binding RestoreSaveToolStripMenuItemEnabled}"/>
+                        <MenuItem Header="Remove save (format slot(s))" Command="{Binding    RemoveSave}"  IsEnabled="{Binding RemoveSaveformatSlotsToolStripMenuItemEnabled}"/>
+                        <Separator/>
+                        <MenuItem Header="Copy save to temp buffer" Command="{Binding CopySave}"  IsEnabled="{Binding copySaveToTempraryBufferToolStripMenuItemEnabled}" />
+                        <MenuItem Header="Paste save from temp buffer" Command="{Binding  PasteSave}"  IsEnabled="{Binding pasteSaveFromTemporaryBufferToolStripMenuItemEnabled}"/>
+                        <Separator/>
+                        <MenuItem Header="Import save"  Command="{Binding ImportSave}"  IsEnabled="{Binding importSaveToolStripMenuItemEnabled}"/>
+                        <MenuItem Header="Export save" Command="{Binding ExportSave}"  IsEnabled="{Binding exportSaveToolStripMenuItemEnabled}"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
+      </Button>
+      <Button Content="Hardware"  Command="{Binding OpenMenu}" x:Name="HardwareMenu" CommandParameter="{Binding  ElementName=HardwareMenu}">
+      
+          <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Read save data">
+                            <MenuItem Header="DexDrive" Command="{Binding DexRead}" />
+                            <Separator/>
+                            <MenuItem Header="MemCARDuino" Command="{Binding MemCARDuinoRead}" />
+                            <Separator/>
+                            <MenuItem Header="PS1CardLink" Command="{Binding PS1CardLinkRead}" />
+                        </MenuItem>
+
+                        <MenuItem Header="Write save data">
+                            <MenuItem Header="DexDrive" Command="{Binding DexWrite}" />
+                            <Separator/>
+                            <MenuItem Header="MemCARDuino" Command="{Binding MemCARDuinoWrite}" />
+                            <Separator/>
+                            <MenuItem Header="PS1CardLink" Command="{Binding PS1CardLinkWrite}" />
+                        </MenuItem>
+
+                        <Separator/>
+
+                        <MenuItem Header="FormatCard" >
+                            <MenuItem Header="DexDrive" Command="{Binding DexFormat}" />
+                            <Separator/>
+                            <MenuItem Header="MemCARDuino" Command="{Binding MemCARDuinoFormat}" />
+
+                            <Separator/>
+
+                            <MenuItem Header="PS1CardLink" Command="{Binding PS1CardLinkFormat}" />
+
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+      
+        </Button>
+      
+      <Button Content="Options"  Command="{Binding OpenMenu}" x:Name="OptionsMenu" CommandParameter="{Binding  ElementName=OptionsMenu}">
+          <Button.ContextMenu>
+            <ContextMenu>
+              <MenuItem Header="Preferences" Command="{Binding OpenPreferences}"/>
+              <Separator/>
+              <MenuItem Header="Plugin" Command="{Binding OpenPlugins}"/>
+              </ContextMenu>
+          </Button.ContextMenu>
+      </Button>
+        
+      <Button Content="Help" Command="{Binding OpenMenu}" x:Name="HelpMenu" CommandParameter="{Binding  ElementName=HelpMenu}">
+          <Button.ContextMenu >
+            <ContextMenu>
+              <MenuItem Header="Readme" Command="{Binding OpenReadme}" />
+            
+            </ContextMenu>
+          </Button.ContextMenu>
+        </Button>
+        </StackPanel>
+      
+    <Grid RowDefinitions="Auto,*,Auto" Margin="30">
+       
+        
+        <StackPanel Orientation="Horizontal">
+          
+          <Button i:Attached.Icon="fas fa-plus-square" Width="30" Height="30" Margin="4" Command="{Binding New}"/>
+          
+          <Button i:Attached.Icon="fas fa-folder-open" Width="30" Height="30" Margin="4"  Command="{Binding OpenCard}"/>
+          
+          <Button i:Attached.Icon="fas fa-save" Width="30" Height="30" Margin="4"  Command="{Binding SaveCard}" IsEnabled="{Binding   SaveButtonEnabled}"/>
+          
+          <Button i:Attached.Icon="fas fa-edit" Width="30" Height="30" Margin="4" Command="{Binding EditHeader}" IsEnabled="{Binding editHeaderButtonEnabled}"/>
+          
+          <Button i:Attached.Icon="fas fa-comment-alt" Width="30" Height="30" Margin="4" Command="{Binding EditComments}" IsEnabled="{Binding commentsButtonEnabled}"/>
+          
+          <Button i:Attached.Icon="fas fa-file-signature" Width="30" Height="30" Margin="4" Command="{Binding EditIcon}"  IsEnabled="{Binding editIconButtonEnabled}"/>
+          <Button i:Attached.Icon="fas fa-file-import" Width="30" Height="30" Margin="4" Command="{Binding ImportSave}"  IsEnabled="{Binding importButtonEnabled}"/>
+          <Button i:Attached.Icon="fas fa-file-export"  Width="30" Height="30" Margin="4" Command="{Binding ExportSave}"  IsEnabled="{Binding exportButtonEnabled}"/>
+          
+          <Button Content="{Binding TBufToolButtonText}" Margin="4"  Command="{Binding CompareWithTemp}" IsEnabled="{Binding TBufToolButtonEnabled}"/>
+            
+        </StackPanel>
+        <TabControl x:Name="MainTabControl" Grid.Row="1" Items="{Binding  PScard}" SelectedIndex="{Binding TabSelectedIndex, Mode=TwoWay}">
+       <TabControl.ContentTemplate>
+         <DataTemplate>
+           <DataGrid CanUserSortColumns="False" CanUserReorderColumns="False" SelectionMode="Single" FontFamily="{Binding SavesFont}" GridLinesVisibility="{Binding GridLines}"  Items="{Binding Saves}" SelectedIndex="{Binding SelectedSaveIndex, Mode=TwoWay}">
+            
+             <DataGrid.Columns>
+                
+               <DataGridTemplateColumn
+                 Header="Icon and Region" >
+                  
+                 <DataGridTemplateColumn.CellTemplate>
+                   <DataTemplate >
+                     <Image Width="48"  Height="16" Source="{Binding Icon}" />
+                   </DataTemplate>
+                 </DataGridTemplateColumn.CellTemplate>
+                  
+               </DataGridTemplateColumn>
+           
+               <DataGridTextColumn
+                 Header="Title" Binding="{Binding Title}"/>
+               <DataGridTextColumn
+                 Header="Product code"  Binding="{Binding ProductCode}"/>
+               <DataGridTextColumn
+                 Header="Identifier" Binding="{Binding Identifier}"/>
+             </DataGrid.Columns>
+           </DataGrid>
+         </DataTemplate>
+       </TabControl.ContentTemplate>
+          <TabControl.Styles>
+              
+            <Style Selector="TabControl">
+              <Setter Property="Margin" Value="0" />
+              <Setter Property="Padding" Value="{DynamicResource TabItemMargin}" />
+              <Setter Property="Background" Value="{DynamicResource TabControlBackground}" />
+              <Setter Property="Template">
+                <ControlTemplate>
+                  <Border Margin="{TemplateBinding Margin}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Background="{TemplateBinding Background}"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                    <DockPanel>
+                      <ItemsPresenter Name="PART_ItemsPresenter"
+                                      Items="{TemplateBinding Items}"
+                                      ItemsPanel="{TemplateBinding ItemsPanel}"
+                                      ItemTemplate="{TemplateBinding ItemTemplate}"
+                                      PointerPressed="InputElement_OnPointerPressed"
+                                      DoubleTapped="PART_ItemsPresenter_OnDoubleTapped"
+                                      DockPanel.Dock="{TemplateBinding TabStripPlacement}"/>
+                      <ContentPresenter Name="PART_SelectedContentHost"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding SelectedContent}"
+                                        ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+                    </DockPanel>
+                  </Border>
+                </ControlTemplate>
+              </Setter>
+            </Style>
+          </TabControl.Styles>
+          <TabControl.ItemTemplate>
+            <DataTemplate>
+              <TextBox IsEnabled="False"  PointerLeave="InputElement_OnPointerLeave" 
+                Text="{Binding cardName, Mode=TwoWay}">
+              </TextBox>
+            </DataTemplate>
+          </TabControl.ItemTemplate>
+        </TabControl>
+        <TextBlock Grid.Row="2" Text="{Binding TooltipText}"/>
+      </Grid>
+  </Panel>
+</controls:FluentWindow>

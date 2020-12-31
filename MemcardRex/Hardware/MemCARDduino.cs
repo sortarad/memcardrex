@@ -1,4 +1,4 @@
-﻿//MemCARDuino communication class
+//MemCARDuino communication class
 //Shendo 2013
 
 using System;
@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace MemCARDuinoCommunication
 {
-    class MemCARDuino
+  public class MemCARDuino
     {
         enum MCinoCommands { GETID = 0xA0, GETVER = 0xA1, MCR = 0xA2, MCW = 0xA3 };
         enum MCinoResponses { ERROR = 0xE0, GOOD = 0x47, BADCHECKSUM = 0x4E, BADSECTOR = 0xFF };

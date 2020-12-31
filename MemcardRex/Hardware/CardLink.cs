@@ -1,4 +1,4 @@
-﻿//PS1CardLink communication class (based on MemCARDuino)
+//PS1CardLink communication class (based on MemCARDuino)
 //Shendo 2013
 
 using System;
@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace PS1CardLinkCommunication
 {
-    class PS1CardLink
+    public class PS1CardLink
     {
         enum PS1CLnkCommands { GETID = 0xA0, GETVER = 0xA1, MCR = 0xA2, MCW = 0xA3 };
         enum PS1CLnkResponses { ERROR = 0xE0, GOOD = 0x47, BADCHECKSUM = 0x4E, BADSECTOR = 0xFF };

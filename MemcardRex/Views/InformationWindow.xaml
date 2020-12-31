@@ -1,0 +1,83 @@
+<controls:FluentWindow xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="400" Height="450" Width="450"
+                      xmlns:controls="using:Avalonia.Controls"
+                      xmlns:vm="using:MemcardRex.ViewModels"
+                      x:Class="MemcardRex.Views.InformationWindow"
+                      Icon="{x:Null}"
+                      x:Name="InformationWindow"
+                      WindowStartupLocation="CenterOwner"
+                      Background="{x:Null}"
+                      Title="Information"
+                      Closed="TopLevel_OnClosed">
+  <controls:FluentWindow.Styles>
+    <Style Selector="TitleBar:fullscreen">
+      <Setter Property="Background" Value="#Df000000" />
+    </Style>
+  </controls:FluentWindow.Styles>
+
+  <Design.DataContext>
+    <vm:InformationWindowViewModel/>
+  </Design.DataContext>
+  
+  <Panel Margin="{Binding #AboutWindow.OffScreenMargin}">
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial TintColor="#222222" MaterialOpacity="0.85" TintOpacity="1" />
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+    
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="Auto,*" Margin="30">
+     
+        
+        <Image Grid.Row="0" Grid.Column="0" Width="100" Height="100" Margin="2" Source="{Binding  Icon}"/>
+        
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" Margin="4">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Title:"/>
+            <TextBlock Text="{Binding  SaveTitleText}" Margin="4,0"/>
+          </StackPanel>
+       
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Product code:"/>
+            <TextBlock Text="{Binding ProductCodeText }" Margin="4,0"/>
+          </StackPanel>
+          
+          
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Identifier:"/>
+            <TextBlock Text="{Binding  IdentifierText}" Margin="4,0"/>
+          </StackPanel>
+          
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Region:"/>
+            <TextBlock Text="{Binding  RegionText}" Margin="4,0"/>
+          </StackPanel>
+          
+          
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Slot:"/>
+            <TextBlock Text="{Binding SlotText }" Margin="4,0"/>
+          </StackPanel>
+          
+          
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Size:"/>
+            <TextBlock Text="{Binding SizeText }" Margin="4,0"/>
+          </StackPanel>
+          
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Icon frames:"/>
+            <TextBlock Text="{Binding IconFramesText }" Margin="4,0"/>
+          </StackPanel>
+     
+        </StackPanel>
+        
+        
+        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="2" Command="{Binding Close}" CommandParameter="{Binding  ElementName=InformationWindow}" Content="OK"/>
+
+      </Grid>
+  </Panel>
+</controls:FluentWindow>

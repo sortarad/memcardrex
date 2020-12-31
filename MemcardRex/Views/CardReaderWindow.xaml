@@ -1,0 +1,43 @@
+<controls:FluentWindow xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="400" Height="300" Width="450"
+                      xmlns:controls="using:Avalonia.Controls"
+                      xmlns:vm="using:MemcardRex.ViewModels"
+                      x:Class="MemcardRex.Views.CardReaderWindow"
+                      Icon="{x:Null}"
+                      x:Name="CardReaderWindow"
+                      WindowStartupLocation="CenterOwner"
+                      Background="{x:Null}"
+                      Title="Card Reader" 
+                      Closed="TopLevel_OnClosed">
+  <controls:FluentWindow.Styles>
+    <Style Selector="TitleBar:fullscreen">
+      <Setter Property="Background" Value="#Df000000" />
+    </Style>
+  </controls:FluentWindow.Styles>
+
+  <Design.DataContext>
+    <vm:CardReaderWindowViewModel/>
+  </Design.DataContext>
+  
+  <Panel Margin="{Binding #CardReaderWindow.OffScreenMargin}">
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial TintColor="#222222" MaterialOpacity="0.85" TintOpacity="1" />
+      </ExperimentalAcrylicBorder.Material>
+    </ExperimentalAcrylicBorder>
+    
+    <Grid RowDefinitions="*,*,60" Margin="30">
+        <TextBlock Text="{Binding Title}" FontSize="16"/>
+        
+        <TextBlock Grid.Row="1" Margin="2" Text="{Binding  Info}"/>
+       
+        <Grid Grid.Row="2" Margin="2" ColumnDefinitions="*,50">
+          <ProgressBar  Value="{Binding Value}" Maximum="{Binding Maximum}"/>
+          <Button Grid.Column="1"  Command="{Binding Close}" CommandParameter="{Binding  ElementName=AboutWindow}" Content="Close"/>
+        </Grid>
+      </Grid>
+  </Panel>
+</controls:FluentWindow>

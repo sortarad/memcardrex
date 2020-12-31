@@ -1,0 +1,104 @@
+<controls:FluentWindow xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="400" Height="400" Width="800"
+                      xmlns:controls="using:Avalonia.Controls"
+                      xmlns:vm="using:MemcardRex.ViewModels"
+                      x:Class="MemcardRex.Views.PreferencesWindow"
+                      Icon="{x:Null}"
+                      x:Name="PreferencesWindow"
+                      WindowStartupLocation="CenterOwner"
+                      Background="{x:Null}"
+                      Title="About">
+  <controls:FluentWindow.Styles>
+    <Style Selector="TitleBar:fullscreen">
+      <Setter Property="Background" Value="#Df000000" />
+    </Style>
+  </controls:FluentWindow.Styles>
+
+  <Design.DataContext>
+    <vm:PreferencesViewModel/>
+  </Design.DataContext>
+  
+  <Panel Margin="{Binding #PreferencesWindow.OffScreenMargin}">
+    <ExperimentalAcrylicBorder IsHitTestVisible="False">
+      <ExperimentalAcrylicBorder.Material>
+        <ExperimentalAcrylicMaterial TintColor="#222222" MaterialOpacity="0.85" TintOpacity="1" />
+      </ExperimentalAcrylicBorder.Material>  
+    </ExperimentalAcrylicBorder>
+    <Grid RowDefinitions="*,Auto" Margin="30">
+      
+        
+        <Grid ColumnDefinitions="*,*">
+          <Grid RowDefinitions="*,*,*,*">
+            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Grid.Row="0">
+              <TextBlock Text="Save title encoding:"/>
+              <ComboBox Grid.Row="1" Grid.Column="0"  SelectedIndex="{Binding Settings.formatType}">
+                <ComboBox.Items>
+                  <ComboBoxItem Content="ASCII"/>
+                  <ComboBoxItem Content="UTF-16"/>
+                </ComboBox.Items>
+              </ComboBox>
+              
+              <TextBlock Grid.Column="1" Text="Save title font:"/>
+              <ComboBox Grid.Row="1" Grid.Column="1" Items="{Binding Fonts}" SelectedItem="{Binding Settings.listFont}"/>
+
+            </Grid>
+            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Grid.Row="1">
+              <TextBlock Text="Icon filter:"/>
+              <ComboBox Grid.Row="1" Grid.Column="0"  SelectedIndex="{Binding Settings.iconInterpolationMode}">
+                <ComboBox.Items>
+                  <ComboBoxItem Content="Nearest Neighbor"/>
+                  <ComboBoxItem Content="Bilinear"/>
+                </ComboBox.Items>
+              </ComboBox>
+              
+              <TextBlock Grid.Column="1" Text="Icon size:"/>
+              <ComboBox Grid.Row="1" Grid.Column="1"  SelectedIndex="{Binding Settings.iconPropertiesSize}">
+                <ComboBox.Items>
+                  <ComboBoxItem Content="32x32"/>
+                  <ComboBoxItem Content="48x48"/>
+                </ComboBox.Items>
+              </ComboBox>
+            </Grid>
+            <Grid RowDefinitions="*,*" Grid.Row="2">
+              <TextBlock Text="Icon background color:"/>
+              <ComboBox Grid.Row="1" HorizontalAlignment="Stretch" SelectedIndex="{Binding Settings.iconBackgroundColor}">
+                <ComboBox.Items>
+                  <ComboBoxItem Content="Transparent"/>
+                  <ComboBoxItem Content="Black (Slim PS1 models)"/>
+                  <ComboBoxItem Content="Gray (Older european PS1 models)"/>
+                  <ComboBoxItem Content="Blue (Standard BIOS color)"/>
+                </ComboBox.Items>
+              </ComboBox>
+            </Grid>
+            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Grid.Row="3">
+              <TextBlock Text="Communication port:"/>
+              <ComboBox Grid.Row="1" Grid.Column="0" IsEnabled="{Binding CommunicationPortsEnabled}" Items="{Binding CommunicationPorts}" SelectedItem="{Binding Settings.communicationPort}"/>
+              
+              <TextBlock Grid.Column="1" Text="Hardware format type:"/>
+              <ComboBox Grid.Row="1" Grid.Column="1"  SelectedIndex="{Binding Settings.formatType}">
+                <ComboBox.Items>
+                  <ComboBoxItem Content="Quick format"/>
+                  <ComboBoxItem Content= "Full format"/>
+                </ComboBox.Items>
+              </ComboBox>
+            </Grid>
+          </Grid>
+          
+          <StackPanel Grid.Column="1" Orientation="Vertical">
+            <CheckBox Content="Show grid on slot list." IsChecked="{Binding Settings.showListGrid}"/>
+            <CheckBox Content="Backup Memory Cards upon opening." IsChecked="{Binding Settings.backupMemcards}"/>
+            <CheckBox Content="Show warning messages (save editing)." IsChecked="{Binding Settings.warningMessage}"/>
+          </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Margin="2">
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="4,0" Command="{Binding Ok}" CommandParameter="{Binding ElementName=PreferencesWindow}"  Content="OK"/>
+            <Button Command="{Binding Cancel}" CommandParameter="{Binding ElementName=PreferencesWindow}"  Content="CANCEL"/>
+          </StackPanel>
+          </Grid>
+      </Grid>
+  </Panel>
+</controls:FluentWindow>
