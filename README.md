@@ -1,5 +1,7 @@
 # memcardrex
-Advanced PlayStation 1 Memory Card editor. Now updated (January 2021) to work with modern operating system and cross-platorm on Windows 10 and MacOS.
+Advanced PlayStation 1 Memory Card editor. 
+
+Now updated (January 2021) to work with modern operating system and cross-platorm on Windows 10 and MacOS.
 
 ## Supported Memory Card formats:
 
@@ -27,7 +29,7 @@ PS3 virtual saves (*.psv) (importing only)
 Hardware interfaces
 MemcardRex supports communication with the real Memory Cards via external devices:
 
-## DexDrive
+### DexDrive
 As you may or may not know DexDrive is a very quirky device and sometimes it just refuses to work.
 Even the first party software (DexPlorer) has problems with it (failed detection of a device).
 If you encounter problems, unplug power from DexDrive, unplug it from COM port and connect it all again.
@@ -37,16 +39,16 @@ Communication was tested on Windows 7 x64 on a real COM port and with a Prolific
 
 To select a COM port DexDrive is connected to go to "Options"->"Preferences".
 
-## MemCARDuino
+### MemCARDuino
 MemCARDuino is an open source Memory Card communication software for various Arduino boards.
 
-## PS1CardLink
+### PS1CardLink
 PS1CardLink is a software for the actual PlayStation and PSOne consoles.
 It requires an official or home made TTL serial cable for communication with PC.
 
 With it your console becomes a Memory Card reader similar to the DexDrive and MemCARDuino.
 
-Credits
+### Credits
 Beta testers:
 Gamesoul Master, Xtreme2damax and Carmax91.
 
