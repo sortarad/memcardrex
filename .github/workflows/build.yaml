@@ -24,7 +24,7 @@ jobs:
             repository: memcardrex
             tags: latest
             build-args: |
-              BUILD_NET=1.0.0.$BUILD_NUMBER
+              BUILD_NET=1.0.0.${{needs.build-job.outputs.build_number}}
         - uses: shrink/actions-docker-extract@v1
           with:
             image: memcardrex
