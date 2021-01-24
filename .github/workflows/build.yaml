@@ -16,13 +16,11 @@ jobs:
           with:
             token: ${{secrets.github_token}}  
         - name: Build
-          run: docker build -t memcardrex --build-arg BUILD_NET=1.0.0.$BUILD_NUMBER .
-        - name: Create dist dir
-          run: mkdir -p dist
-        - name: Copy output msis
-          run: docker cp memcardrex:/root/.wine/drive_c/Build/MemcardRex.msi dist/MemcardRex.msi 
-        - name: Copy output dmg
-          run: docker cp memcardrex:/tmp/MemcardRex.dmg dist/MemcardRex.dmg 
+          run: |
+            docker build -t memcardrex --build-arg BUILD_NET=1.0.0.$BUILD_NUMBER .
+            mkdir -p dist
+            docker cp memcardrex:/root/.wine/drive_c/Build/MemcardRex.msi dist/MemcardRex.msi 
+            docker cp memcardrex:/tmp/MemcardRex.dmg dist/MemcardRex.dmg 
         - name: Upload the artifacts
           uses: skx/github-action-publish-binaries@master
           env:
