@@ -15,6 +15,7 @@ jobs:
           with:
             fetch-depth: 0
         - name: Generate build number
+          id: buildnumber
           uses: einaregilsson/build-number@v3
           with:
             token: ${{secrets.github_token}}  
@@ -24,8 +25,9 @@ jobs:
             repository: memcardrex
             tags: latest
             build-args: |
-              BUILD_NET=1.0.0.${{steps.outputs.build_number}}
+              BUILD_NET=1.0.0.${{steps.buildnumber.outputs.build_number}}
         - uses: shrink/actions-docker-extract@v1
+          id: extract
           with:
             image: memcardrex
             path: /tmp/MemcardRex.*
