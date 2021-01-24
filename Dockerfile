@@ -11,7 +11,7 @@ RUN dotnet publish "/git/MemcardRex/MemcardRex.csproj" -c release -f net5.0 -r w
 
 
 #Fix for .net core on linux bug (icon)
-RUN node /git/bugfix_icon.js "/git/MemcardRex/bin/release/net5.0/win-x64/publish/MemcardRex.exe" "/git/MemcardRex/bin/release/net5.0/win-x64/publish/Assets/avalonia-logo.ico"
+RUN node /git/bugfix_icon.js "/git/MemcardRex/bin/release/net5.0/win-x64/publish/MemcardRex.exe" "/git/MemcardRex/Assets/avalonia-logo.ico"
 
 #Fix for .net core on linux bug (run as GUI app)
 RUN python3 /git/bugfix_gui.py  "/git/MemcardRex/bin/release/net5.0/win-x64/publish/MemcardRex.exe"

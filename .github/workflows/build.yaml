@@ -15,9 +15,9 @@ jobs:
           uses: einaregilsson/build-number@v3
           with:
             token: ${{secrets.github_token}}  
-        - name: Build
+        - name: Build and copy artifacts
           run: |
-            docker build -t memcardrex --build-arg BUILD_NET=1.0.0.$BUILD_NUMBER .
+            docker image build -t memcardrex --name build --build-arg BUILD_NET=1.0.0.$BUILD_NUMBER .
             mkdir -p dist
             docker cp memcardrex:/root/.wine/drive_c/Build/MemcardRex.msi dist/MemcardRex.msi 
             docker cp memcardrex:/tmp/MemcardRex.dmg dist/MemcardRex.dmg 
