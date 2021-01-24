@@ -22,14 +22,13 @@ jobs:
         - name: Build Docker Image
           uses: docker/build-push-action@v2
           with:
-            repository: memcardrex
             tags: latest
             build-args: |
               BUILD_NET=1.0.0.${{steps.buildnumber.outputs.build_number}}
         - uses: shrink/actions-docker-extract@v1
           id: extract
           with:
-            image: memcardrex
+            image: latest
             path: /tmp/MemcardRex.*
         - name: Upload Dist
           uses: actions/upload-artifact@v2
