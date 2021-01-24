@@ -1,6 +1,9 @@
 name: Build MemcardRex
 
-on: push
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
   build-job:
@@ -15,15 +18,19 @@ jobs:
           uses: einaregilsson/build-number@v3
           with:
             token: ${{secrets.github_token}}  
-        - name: Build and copy artifacts
-          run: |
-            docker image build -t memcardrex --build-arg BUILD_NET=1.0.0.$BUILD_NUMBER .
-            mkdir -p dist
-            docker cp memcardrex:/tmp/MemcardRex.msi dist/MemcardRex.msi 
-            docker cp memcardrex:/tmp/MemcardRex.dmg dist/MemcardRex.dmg 
-        - name: Upload the artifacts
-          uses: skx/github-action-publish-binaries@master
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Build Docker Image
+          uses: docker/build-push-action@v1
           with:
-            args: 'dist/*'
+            repository: memcardrex
+            tags: latest
+            build-args: |
+              BUILD_NET=1.0.0.$BUILD_NUMBER
+        - uses: shrink/actions-docker-extract@v1
+          with:
+            image: memcardrex
+            path: /tmp/MemcardRex.*
+        - name: Upload Dist
+            uses: actions/upload-artifact@v2
+            with:
+              path: ${{ steps.extract.outputs.destination }}
+              name: dist
