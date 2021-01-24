@@ -1,0 +1,31 @@
+name: Build MemcardRex
+
+on: push
+
+jobs:
+  build-job:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+        - name: Git checkout
+          uses: actions/checkout@v1
+          with:
+            fetch-depth: 0
+        - name: Generate build number
+            uses: einaregilsson/build-number@v3
+            with:
+                token: ${{secrets.github_token}}  
+        - name: Build
+            run: docker build -t memcardrex --build-arg BUILD_NET=1.0.0.$BUILD_NUMBER .
+        - name: Create dist dir
+            run: mkdir -p dist
+        - name: Copy output msis
+            run: docker cp memcardrex:/root/.wine/drive_c/Build/MemcardRex.msi dist/MemcardRex.msi 
+        - name: Copy output dmg
+            run: docker cp memcardrex:/tmp/MemcardRex.dmg dist/MemcardRex.dmg 
+        - name: Upload the artifacts
+            uses: skx/github-action-publish-binaries@master
+            env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+                args: 'dist/*'
