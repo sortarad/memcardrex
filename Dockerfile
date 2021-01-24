@@ -65,4 +65,5 @@ RUN rm -rf /git
 #Create MSI for X64
 WORKDIR /root/.wine/drive_c/Build/
 RUN (timelimit xvfb-run -a wine "C:\Build\WixCreator\WixCreator.exe" "C:\Build\licence-agreement.rtf" "C:\Build\MemcardRex" ${BUILD_NET} "C:\Build\MemcardRex.msi" "C:\Build\Wix\bin"; exit 0)
+RUN cp -f /root/.wine/drive_c/Build/MemcardRex.msi /tmp/MemcardRex.msi
 #Now MSI in /root/.wine/drive_c/Build/MemcardRex.msi

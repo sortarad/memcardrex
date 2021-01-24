@@ -19,7 +19,7 @@ jobs:
           run: |
             docker image build -t memcardrex --build-arg BUILD_NET=1.0.0.$BUILD_NUMBER .
             mkdir -p dist
-            docker cp memcardrex:/root/.wine/drive_c/Build/MemcardRex.msi dist/MemcardRex.msi 
+            docker cp memcardrex:/tmp/MemcardRex.msi dist/MemcardRex.msi 
             docker cp memcardrex:/tmp/MemcardRex.dmg dist/MemcardRex.dmg 
         - name: Upload the artifacts
           uses: skx/github-action-publish-binaries@master
