@@ -19,7 +19,7 @@ jobs:
           with:
             token: ${{secrets.github_token}}  
         - name: Build Docker Image
-          uses: docker/build-push-action@v1
+          uses: docker/build-push-action@v2
           with:
             repository: memcardrex
             tags: latest
