@@ -30,7 +30,7 @@ jobs:
             image: memcardrex
             path: /tmp/MemcardRex.*
         - name: Upload Dist
-            uses: actions/upload-artifact@v2
-            with:
-              path: ${{ steps.extract.outputs.destination }}
-              name: dist
+          uses: actions/upload-artifact@v2
+          with:
+            path: ${{ steps.extract.outputs.destination }}
+            name: dist
