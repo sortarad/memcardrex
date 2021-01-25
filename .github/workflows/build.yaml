@@ -28,8 +28,8 @@ jobs:
         - uses: shrink/actions-docker-extract@v1
           id: extract
           with:
-            image: latest
-            path: /tmp/MemcardRex.*
+            image: docker.io/library/latest
+            path: tmp/.
         - name: Upload Dist
           uses: actions/upload-artifact@v2
           with:
