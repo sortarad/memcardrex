@@ -29,7 +29,7 @@ jobs:
           id: extract
           with:
             image: docker.io/library/latest
-            path: tmp/.
+            path: dist/.
         - name: Upload Dist
           uses: actions/upload-artifact@v2
           with:
